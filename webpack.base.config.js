@@ -11,18 +11,19 @@ module.exports = {
         path: path.join(__dirname, './dist')
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        less: ExtractTextPlugin.extract({
-                            use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
+
+                        sass: ExtractTextPlugin.extract({
+                            use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
                             fallback: 'vue-style-loader'
                         }),
+
                         css: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'autoprefixer-loader', 'less-loader'],
+                            use: ['css-loader', 'autoprefixer-loader'],
                             fallback: 'vue-style-loader'
                         })
                     }
@@ -44,13 +45,15 @@ module.exports = {
                     fallback: 'style-loader'
                 })
             },
+
             {
-                test: /\.less/,
+                test: /\.sass/,
                 use: ExtractTextPlugin.extract({
-                    use: ['autoprefixer-loader', 'less-loader'],
+                    use: ['autoprefixer-loader', 'sass-loader'],
                     fallback: 'style-loader'
                 })
             },
+
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=1024'
